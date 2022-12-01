@@ -8,7 +8,7 @@ class Sphere
 public:
 	static void* operator new(size_t size);
 	static void operator delete(void* pMem);
-
+	//
 
 	Vec3f center;                           /// position of the sphere
 	float radius, radius2;                  /// sphere radius and radius^2
