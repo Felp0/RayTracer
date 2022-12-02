@@ -10,6 +10,7 @@ public:
 	static void operator delete(void* pMem);
 	//
 
+	
 	Vec3f center;                           /// position of the sphere
 	float radius, radius2;                  /// sphere radius and radius^2
 	Vec3f surfaceColor, emissionColor;      /// surface color and emission (light)

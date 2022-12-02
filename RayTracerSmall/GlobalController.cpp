@@ -8,9 +8,8 @@ Tracker* Header::m_tracker;
 
 void* operator new(size_t size, Tracker* tracker)
 {
-	try {
-		std::cout << "----CALLING OPERATOR NEW WITH TRACKER---" << std::endl;
-
+	try 
+	{
 		size_t requestedBytes = size + sizeof(Header) + sizeof(Footer);
 		char* pMem = (char*)malloc(requestedBytes);
 

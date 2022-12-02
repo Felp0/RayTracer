@@ -145,11 +145,13 @@
     <ClCompile Include="GlobalController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
+    <ClCompile Include="RayTracer.cpp" />
     <ClCompile Include="Tracker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalController.h" />
     <ClInclude Include="MemoryPool.h" />
+    <ClInclude Include="RayTracer.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Tracker.h" />
     <ClInclude Include="Vec3.h" />
