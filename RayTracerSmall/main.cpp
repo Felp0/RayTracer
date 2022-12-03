@@ -329,7 +329,7 @@ int main(int argc, char **argv)
 
 	//m_ray->SmoothScaling();
 
-	delete[] m_ray;
+	
 
 	return 0;
 }

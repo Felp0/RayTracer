@@ -36,7 +36,7 @@ public:
 	void SimpleShrinking();
 	void SmoothScaling();
 
-	uint64_t data[2];
+	
 
 	static Pool m_MemoryAllocator;
 
