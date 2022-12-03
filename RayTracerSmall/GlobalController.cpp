@@ -8,6 +8,7 @@ Tracker* Header::m_tracker;
 
 void* operator new(size_t size, Tracker* tracker)
 {
+	
 	try 
 	{
 		size_t requestedBytes = size + sizeof(Header) + sizeof(Footer);
@@ -17,6 +18,7 @@ void* operator new(size_t size, Tracker* tracker)
 		Header* pHeader = (Header*)pMem;
 		pHeader->m_tracker = tracker;
 		tracker->AllocateBytes(size, pHeader);
+		pHeader->pPool->Allocate(size);
 
 
 		void* pFooterAddr = pMem + sizeof(Header) + size;
@@ -25,6 +27,7 @@ void* operator new(size_t size, Tracker* tracker)
 
 		void* pStartMemBlock = pMem + sizeof(Header);
 		return pStartMemBlock;
+		
 	}
 	catch (const std::bad_alloc& error)
 	{

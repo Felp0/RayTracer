@@ -13,6 +13,7 @@
 #include "Vec3.h"
 #include "Sphere.h"
 #include "GlobalController.h"
+#include "Object.h"
 
 
 

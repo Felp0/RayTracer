@@ -289,18 +289,48 @@
 // we render that scene, by calling the render() function.
 //[/comment]
 
+//http://dmitrysoshnikov.com/compilers/writing-a-pool-allocator/
+
 int main(int argc, char **argv)
 {
+	
 	// This sample only allows one choice per program execution. Feel free to improve upon this
 	srand(13);
 	//BasicRender();
 	//SimpleShrinking();
-	RayTracer* m_ray = new RayTracer();
-	m_ray->SmoothScaling();
+	//RayTracer* m_ray = new RayTracer();
+	//m_ray->SmoothScaling();
 
-	int* number = new int[5];
-	delete number;
-	delete m_ray;
+	//Testing Memory pool
+	//constexpr int arraySize = 10;
+
+	//Object* objects[arraySize];
+
+	//std::cout << "Size = " << sizeof(Object) << std::endl << std::endl;
+
+	//std::cout << "Allocating " << arraySize << " objs" << std::endl;
+
+	////Allocate
+	//for (int i = 0; i < arraySize; ++i)
+	//{
+	//	objects[i] = new Object();
+	//	std::cout << "new: " << i << objects[i] << std::endl;
+	//}
+
+	//std::cout << std::endl;
+
+	////Deallocate
+	//for (int i = arraySize; i >= 0; --i)
+	//{
+	//	std::cout << "Deleting " << i << " " << objects[i] << std::endl;
+	//	delete objects[i];
+
+	//}
+	//std::cout << std::endl;
+
+	//objects[0] = new Object();
+	//std::cout << "new [0] = " << objects[0] << std::endl << std::endl;
+
 	
 
 	return 0;
