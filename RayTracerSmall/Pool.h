@@ -33,12 +33,12 @@ public:
 
 	void Deallocate(void* pMem, size_t size);
 
-	Chunk* AllocateBlock(size_t Chunksize);
-
 private:
 	size_t				m_chunksBlock;
 
 	Chunk*				pAlloc = nullptr;
+
+	Chunk* AllocateBlock(size_t Chunksize);
 
 
 };

@@ -209,17 +209,7 @@ void RayTracer::SmoothScaling()
 	}
 }
 
-void* RayTracer::operator new(size_t size)
-{
-	std::cout << "--CLASS SPECIFIC RAY TRACER NEW CALLED" << std::endl;
-	return::operator new(size, &Tracker::GetTracker());
-}
 
-void RayTracer::operator delete(void* pMem)
-{
-	std::cout << "--CLASS SPECIFIC RAY TRACER DELETE CALLED" << std::endl;
-	return::operator delete(pMem);
-}
 
 void* Sphere::operator new(size_t size)
 {

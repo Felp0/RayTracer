@@ -291,6 +291,8 @@
 
 //http://dmitrysoshnikov.com/compilers/writing-a-pool-allocator/
 
+Pool RayTracer::m_MemoryAllocator{ 2 };
+
 int main(int argc, char **argv)
 {
 	
@@ -298,40 +300,36 @@ int main(int argc, char **argv)
 	srand(13);
 	//BasicRender();
 	//SimpleShrinking();
-	//RayTracer* m_ray = new RayTracer();
+	constexpr int arraysize = 7;
+
+	RayTracer* m_ray[arraysize];
+	std::cout << "size(Obj) = " << sizeof(RayTracer) << std::endl << std::endl;
+
+	std::cout << "Allocating " << arraysize << " objs" << std::endl;
+
+	//allocate
+	for (int i = 0; i < arraysize; ++i)
+	{
+		m_ray[i] = new RayTracer();
+		std::cout << "new [ " << i << " ] = " << m_ray[i] << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	//deallocate
+	for (int i = arraysize - 1; i >= 0; --i)
+	{
+		std::cout << "deleting " << i << " " << m_ray[i] << std::endl;
+		delete m_ray[i];
+
+	}
+	std::cout << std::endl;
+
+
+
 	//m_ray->SmoothScaling();
 
-	//Testing Memory pool
-	//constexpr int arraySize = 10;
-
-	//Object* objects[arraySize];
-
-	//std::cout << "Size = " << sizeof(Object) << std::endl << std::endl;
-
-	//std::cout << "Allocating " << arraySize << " objs" << std::endl;
-
-	////Allocate
-	//for (int i = 0; i < arraySize; ++i)
-	//{
-	//	objects[i] = new Object();
-	//	std::cout << "new: " << i << objects[i] << std::endl;
-	//}
-
-	//std::cout << std::endl;
-
-	////Deallocate
-	//for (int i = arraySize; i >= 0; --i)
-	//{
-	//	std::cout << "Deleting " << i << " " << objects[i] << std::endl;
-	//	delete objects[i];
-
-	//}
-	//std::cout << std::endl;
-
-	//objects[0] = new Object();
-	//std::cout << "new [0] = " << objects[0] << std::endl << std::endl;
-
-	
+	delete[] m_ray;
 
 	return 0;
 }

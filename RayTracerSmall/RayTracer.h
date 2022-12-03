@@ -29,13 +29,26 @@
 class RayTracer
 {
 public:
-	static void* operator new(size_t size);
-	static void operator delete(void* pMem);
+	
 
 	void render(const std::vector<Sphere>& spheres, int iteration);
 	void BasicRender();
 	void SimpleShrinking();
 	void SmoothScaling();
+
+	uint64_t data[2];
+
+	static Pool m_MemoryAllocator;
+
+	static void* operator new(size_t size)
+	{
+		return m_MemoryAllocator.Allocate(size);
+	}
+
+	static void operator delete(void* pMem, size_t size)
+	{
+		return m_MemoryAllocator.Deallocate(pMem, size);
+	}
 
 	
 };
