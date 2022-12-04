@@ -1,5 +1,6 @@
 #pragma once
 #include "Tracker.h"
+#include "Pool.h"
 
 void* operator new(size_t size);
 void* operator new(size_t size, Tracker* tracker);
@@ -13,6 +14,7 @@ struct Header
 	static Tracker* m_tracker;
 	static Header* m_prev;
 	static Header* m_next;
+	Pool* pPool;
 };
 
 struct Footer

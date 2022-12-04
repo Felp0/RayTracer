@@ -11,6 +11,7 @@ Tracker Tracker::defaultTracker;
  void Tracker::AllocateBytes(size_t size, Header* header)
  {
 	 m_totalMemory += size;
+	 m_MemoryAvailable += size;
 	 std::cout << "---TOTAL MEMORY ALLOCATED: " << m_totalMemory << std::endl;
 
 	 //Header stuff
@@ -23,19 +24,42 @@ Tracker Tracker::defaultTracker;
 	 //Disavantages of DLL
 	/* Every node of DLL Requires extra space for a previous pointer.It is possible to implement DLL with a single pointer though*/
 	 header->m_prev = NULL; //Set previous to null because it doesnt exist yet
-	 header->m_next = m_header; //Set next header to the header pointer
-	 if (m_header != NULL)
+	 header->m_next = m_currentHeader; //Set next header to the header pointer
+	 if (m_currentHeader != NULL)
 	 {
 		 //if the Header got a value set it to point to previous header
-		 m_header->m_prev = header;
+		 m_currentHeader->m_prev = header;
 	 }
-	 m_header = header;
+	 m_currentHeader = header;
 	 //ask about this
  }
 
 
  void Tracker::RemoveBytes(size_t size, Header* header)
  {
-	 m_totalMemory -= size;
-	 std::cout << "---TOTAL MEMORY: " << m_totalMemory << std::endl;
+	 if (m_currentHeader == NULL)
+		 return;
+
+	 m_MemoryAvailable += size;
+	 std::cout << "---TOTAL MEMORY FREE: " << m_MemoryAvailable << std::endl << std::endl;
+
+	 //Setting the pointer from old current to new current (old current next) when deleting from the linked list
+	 if (m_currentHeader == header)
+	 {
+		 m_currentHeader = header->m_next;
+	 }
+
+	 //Adjusting the next pointer for the linked list
+	 if (header->m_next != NULL)
+	 {
+		 header->m_next->m_prev = header->m_prev;
+	 }
+
+	 //Adjusting previous pointer for the linked list
+	 if (header->m_prev != NULL)
+	 {
+		 header->m_prev->m_next = header->m_next;		
+	 }
+
+	 
  }

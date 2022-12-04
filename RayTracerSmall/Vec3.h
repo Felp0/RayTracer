@@ -32,4 +32,11 @@ public:
 		os << "[" << v.x << " " << v.y << " " << v.z << "]";
 		return os;
 	}
+
+	typedef Vec3<float> Vec3f;
+	float mix(const float& a, const float& b, const float& mix)
+	{
+		return b * mix + a * (1 - mix);
+	}
+
 };
