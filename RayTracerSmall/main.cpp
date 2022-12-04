@@ -291,11 +291,12 @@
 
 //http://dmitrysoshnikov.com/compilers/writing-a-pool-allocator/
 
-Pool RayTracer::m_MemoryAllocator{ 2 };
+Pool RayTracer::m_MemoryAllocator{&Tracker::GetTracker(),4};
 
 int main(int argc, char **argv)
 {
 	
+	Tracker* pTracker = (Tracker*)malloc(sizeof(Tracker));
 	// This sample only allows one choice per program execution. Feel free to improve upon this
 	srand(13);
 	//BasicRender();
@@ -312,24 +313,34 @@ int main(int argc, char **argv)
 	{
 		m_ray[i] = new RayTracer();
 		std::cout << "new [ " << i << " ] = " << m_ray[i] << std::endl;
+		pTracker->GetTracker().AddUsedMem();
+		pTracker->GetTracker().RemoveAvailableMem();
 	}
 
-	std::cout << std::endl;
+	
+
+	std::cout << "Memory Used: " << pTracker->GetTracker().GetMemUsed() << std::endl;
+	std::cout << "Memory Available: " << pTracker->GetTracker().GetAvailableMem() << std::endl << std::endl;
 
 	//deallocate
 	for (int i = arraysize - 1; i >= 0; --i)
 	{
 		std::cout << "deleting " << i << " " << m_ray[i] << std::endl;
 		delete m_ray[i];
-
+		pTracker->GetTracker().RemoveUsedMem();
 	}
-	std::cout << std::endl;
+
+	std::cout << "Chunks Used: " << pTracker->GetTracker().GetNumOfChunks() << std::endl;
+	std::cout << "Memory Used: " << pTracker->GetTracker().GetMemUsed() << std::endl;
+	std::cout << "Memory Free: " << pTracker->GetTracker().GetAvailableMem() << std::endl;
+
+
 
 
 
 	//m_ray->SmoothScaling();
 
-	
+	free(pTracker); 
 
 	return 0;
 }
