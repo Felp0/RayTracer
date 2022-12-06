@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pool.cpp" />
     <ClCompile Include="RayTracer.cpp" />
+    <ClCompile Include="ThreadsManager.cpp" />
     <ClCompile Include="Tracker.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="Pool.h" />
     <ClInclude Include="RayTracer.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="ThreadsManager.h" />
     <ClInclude Include="Tracker.h" />
     <ClInclude Include="Vec3.h" />
   </ItemGroup>
