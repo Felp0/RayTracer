@@ -21,6 +21,9 @@ auto enqueue(F&& f, Args&&... args)->
 	>(std::bind(std::forward<F>(f), std::forward<Args>(args)...));
 
 	std::future<return_type> res = task->get_future();
+	{
+		std::unique_lock<std::mutex> lock(mutexQu)
+	}
 }
 
 class ThreadsManager
