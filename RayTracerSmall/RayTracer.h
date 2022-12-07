@@ -31,10 +31,10 @@ class RayTracer
 public:
 	
 
-	void render(const std::vector<Sphere>& spheres, int iteration);
+	static void render(const std::vector<Sphere>& spheres, int iteration);
 	void BasicRender();
 	void SimpleShrinking();
-	void SmoothScaling();
+	static void SmoothScaling();
 
 	
 

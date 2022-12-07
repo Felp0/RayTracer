@@ -18,16 +18,13 @@ public:
 	static Tracker&			GetTracker();
 
 	inline void				SetTotalMemory(size_t allocatedMem) { m_totalMemory = allocatedMem; }
-	inline void				AddUsedMem() { m_MemoryUsed++; }
-	inline void				RemoveUsedMem() { m_MemoryUsed--; }
-	inline void				AddAvailableMem() { m_MemoryAvailable++; }
-	inline void				RemoveAvailableMem() { m_MemoryAvailable--; }
-	inline void				SetChunksUsed() { m_ChunksUsed++; }
+	//inline void				AddUsedMem() { m_MemoryUsed++; }
+	//inline void				RemoveUsedMem() { m_MemoryUsed--; }
+	//inline void				SetChunksUsed() { m_ChunksUsed++; }
 
 	inline size_t			GetTotalAllocatedMemory() { return m_totalMemory; }
 	inline size_t			GetMemUsed() { return m_MemoryUsed; }
-	inline size_t			GetAvailableMem() { return m_MemoryAvailable; }
-	inline size_t			GetNumOfChunks() { return m_ChunksUsed; }
+	//inline size_t			GetNumOfChunks() { return m_ChunksUsed; }
 
 
 private:
@@ -39,9 +36,9 @@ private:
 	static Tracker			defaultTracker;
 
 	size_t					m_totalMemory;
+	size_t					m_trackerMemory = 0;
 
 	size_t					m_MemoryUsed = 0;
-	size_t					m_MemoryAvailable = 0;
-	size_t					m_ChunksUsed = 0;
+	//size_t					m_MemoryAvailable = 0;
 };
 

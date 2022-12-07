@@ -10,10 +10,9 @@ Tracker Tracker::defaultTracker;
 
  void Tracker::AllocateBytes(size_t size, Header* header)
  {
-	 m_totalMemory += size;
-	 m_MemoryAvailable += size;
-	 std::cout << "---TOTAL MEMORY ALLOCATED: " << m_totalMemory << std::endl;
+	 m_trackerMemory += size;
 
+	 std::cout << "---TOTAL MEMORY ALLLOCATED:  " << m_trackerMemory << std::endl;
 	 //Header stuff
 	 header->size = size;
 	 header->checkvalue = 42;
@@ -40,9 +39,8 @@ Tracker Tracker::defaultTracker;
 	 if (m_currentHeader == NULL)
 		 return;
 
-	 m_MemoryAvailable += size;
-	 std::cout << "---TOTAL MEMORY FREE: " << m_MemoryAvailable << std::endl << std::endl;
-
+	 m_trackerMemory -= size;
+	 std::cout << "---TOTAL MEMORY AFTER DELETE: " << m_trackerMemory << std::endl;
 	 //Setting the pointer from old current to new current (old current next) when deleting from the linked list
 	 if (m_currentHeader == header)
 	 {
@@ -63,3 +61,4 @@ Tracker Tracker::defaultTracker;
 
 	 
  }
+ //Check CNA

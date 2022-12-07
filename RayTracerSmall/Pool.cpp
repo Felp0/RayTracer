@@ -2,9 +2,18 @@
 #include "GlobalController.h"
 #include "Tracker.h"
 
+Pool Pool::pPool;
+
+Pool& Pool::GetPool()
+{
+	return pPool;
+}
+
+
 //if no chunks in the block allocate a new one
 void* Pool::Allocate(size_t size)
 {
+	m_totalMemory += size;
 	//no chunks left in the current block, allocate a new one passing the chunk size and the header
 	if (pAlloc == __nullptr)
 		pAlloc = AllocateBlock(size);
@@ -18,6 +27,8 @@ void* Pool::Allocate(size_t size)
 
 void Pool::Deallocate(void* pMem, size_t size)
 {
+	m_MemoryUsed--;
+	m_MemoryAvailable += size;
 	//working on this later
 	Header* pheader = (Header*)pMem;
 	pheader->m_tracker = m_tracker;
@@ -34,7 +45,7 @@ void Pool::Deallocate(void* pMem, size_t size)
 //Returns a Chunk pointer set to the beginining of the block.
 Chunk* Pool::AllocateBlock(size_t Chunksize)
 {
-	m_tracker->GetTracker().SetChunksUsed();
+	pPool.GetPool().SetChunksUsed();
 
 	std::cout << "Allocating Block: (" << m_chunksBlock << " chunks) : \n\n";
 

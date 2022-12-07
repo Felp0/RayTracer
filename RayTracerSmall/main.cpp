@@ -297,6 +297,7 @@ int main(int argc, char **argv)
 {
 	
 	Tracker* pTracker = (Tracker*)malloc(sizeof(Tracker));
+	Pool* pPool = (Pool*)malloc(sizeof(Pool));
 	// This sample only allows one choice per program execution. Feel free to improve upon this
 	srand(13);
 	//BasicRender();
@@ -313,34 +314,38 @@ int main(int argc, char **argv)
 	{
 		m_ray[i] = new RayTracer();
 		std::cout << "new [ " << i << " ] = " << m_ray[i] << std::endl;
-		pTracker->GetTracker().AddUsedMem();
-		pTracker->GetTracker().RemoveAvailableMem();
+		pPool->GetPool().GetAvailableMem();
 	}
-
+	 
+	std::cout << std::endl;
 	
 
-	std::cout << "Memory Used: " << pTracker->GetTracker().GetMemUsed() << std::endl;
-	std::cout << "Memory Available: " << pTracker->GetTracker().GetAvailableMem() << std::endl << std::endl;
+	//std::cout << "Memory Used: " << pTracker->GetTracker().GetMemUsed() << std::endl;
 
 	//deallocate
 	for (int i = arraysize - 1; i >= 0; --i)
 	{
 		std::cout << "deleting " << i << " " << m_ray[i] << std::endl;
 		delete m_ray[i];
-		pTracker->GetTracker().RemoveUsedMem();
+		//pTracker->GetTracker().RemoveUsedMem();
 	}
 
-	std::cout << "Chunks Used: " << pTracker->GetTracker().GetNumOfChunks() << std::endl;
-	std::cout << "Memory Used: " << pTracker->GetTracker().GetMemUsed() << std::endl;
-	std::cout << "Memory Free: " << pTracker->GetTracker().GetAvailableMem() << std::endl;
+	std::cout << "---BLOCKS USED: " << pPool->GetPool().GetNumOfChunks() << std::endl;
+	//std::cout << "Memory Used: " << pTracker->GetTracker().GetMemUsed() << std::endl;
+	//std::cout << "Memory Free: " << pTracker->GetTracker().GetAvailableMem() << std::endl;
+
+	m_ray[0] = new RayTracer();
+	std::cout << "new [0] = " << m_ray[0] << std::endl;
+
+	delete m_ray[0];
 
 
 
 
-
-	//m_ray->SmoothScaling();
+	RayTracer::SmoothScaling();
 
 	free(pTracker); 
+	free(pPool);
 
 	return 0;
 }
