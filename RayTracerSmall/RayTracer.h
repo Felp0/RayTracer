@@ -6,14 +6,15 @@
 #include <vector>
 #include <iostream>
 #include <cassert>
-// Windows only
+#include <chrono>
 #include <algorithm>
 #include <sstream>
 #include <string.h>
 #include "Vec3.h"
 #include "Sphere.h"
 #include "GlobalController.h"
-#include "Object.h"
+#include "ObjectForPool.h"
+#include "Threads.h"
 
 
 
@@ -28,13 +29,15 @@
 
 class RayTracer
 {
+
 public:
 	
 
 	static void render(const std::vector<Sphere>& spheres, int iteration);
 	void BasicRender();
 	void SimpleShrinking();
-	static void SmoothScaling();
+	void SmoothScaling(int i);
+	
 
 	
 
@@ -49,7 +52,8 @@ public:
 	{
 		return m_MemoryAllocator.Deallocate(pMem, size);
 	}
-
+private:
+	std::mutex aMutex;
 	
 };
 

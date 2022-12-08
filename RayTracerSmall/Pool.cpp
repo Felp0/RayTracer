@@ -47,7 +47,7 @@ Chunk* Pool::AllocateBlock(size_t Chunksize)
 {
 	pPool.GetPool().SetChunksUsed();
 
-	std::cout << "Allocating Block: (" << m_chunksBlock << " chunks) : \n\n";
+	std::cout << "Allocating Block: (" << m_chunksBlock << " chunks) : " << std::endl << std::endl;
 
 	size_t sizeBlock = m_chunksBlock * Chunksize;
 

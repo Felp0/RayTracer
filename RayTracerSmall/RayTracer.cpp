@@ -95,6 +95,9 @@ Vec3f trace(
 
 void RayTracer::render(const std::vector<Sphere>& spheres, int iteration)
 {
+
+	auto start = std::chrono::steady_clock::now();
+
 	// quick and dirty
 	unsigned width = 640, height = 480;
 	// Recommended Testing Resolution
@@ -131,10 +134,20 @@ void RayTracer::render(const std::vector<Sphere>& spheres, int iteration)
 	}
 	ofs.close();
 	delete[] image;
+
+	auto finish = std::chrono::steady_clock::now();
+
+	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
+
+	std::cout << "---TIME TO RENDER: " << secondsPass << std::endl << std::endl;
+
+
 }
 
 void RayTracer::BasicRender()
 {
+	auto start = std::chrono::steady_clock::now();
+
 	std::vector<Sphere> spheres;
 	// Vector structure for Sphere (position, radius, surface color, reflectivity, transparency, emission color)
 
@@ -145,10 +158,18 @@ void RayTracer::BasicRender()
 
 	// This creates a file, titled 1.ppm in the current working directory
 	render(spheres, 1);
+
+	auto finish = std::chrono::steady_clock::now();
+
+	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
+
+	std::cout << "--TIME TO BASIC RENDER: " << secondsPass << std::endl << std::endl;
 }
 
 void RayTracer::SimpleShrinking()
 {
+	auto start = std::chrono::steady_clock::now();
+
 	std::vector<Sphere> spheres;
 	// Vector structure for Sphere (position, radius, surface color, reflectivity, transparency, emission color)
 
@@ -188,25 +209,38 @@ void RayTracer::SimpleShrinking()
 		// Dont forget to clear the Vector holding the spheres.
 		spheres.clear();
 	}
+
+	auto finish = std::chrono::steady_clock::now();
+
+	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
+
+	std::cout << "---TIME TO SIMPLE SHRINKING: " << secondsPass << std::endl << std::endl;
 }
 
-void RayTracer::SmoothScaling()
+void RayTracer::SmoothScaling(int i)
 {
+	auto start = std::chrono::steady_clock::now();
 	std::vector<Sphere> spheres;
 	// Vector structure for Sphere (position, radius, surface color, reflectivity, transparency, emission color)
 
-	for (float r = 0; r <= 100; r++)
+	//for (float r = 0; r <= 100; r++)
 	{
 		spheres.push_back(Sphere(Vec3f(0.0, -10004, -20), 10000, Vec3f(0.20, 0.20, 0.20), 0, 0.0));
-		spheres.push_back(Sphere(Vec3f(0.0, 0, -20), r / 100, Vec3f(1.00, 0.32, 0.36), 1, 0.5)); // Radius++ change here
+		spheres.push_back(Sphere(Vec3f(0.0, 0, -20), i / 100., Vec3f(1.00, 0.32, 0.36), 1, 0.5)); // Radius++ change here
 		spheres.push_back(Sphere(Vec3f(5.0, -1, -15), 2, Vec3f(0.90, 0.76, 0.46), 1, 0.0));
 		spheres.push_back(Sphere(Vec3f(5.0, 0, -25), 3, Vec3f(0.65, 0.77, 0.97), 1, 0.0));
-		render(spheres, r);
-		std::cout << "Rendered and saved spheres" << r << ".ppm" << std::endl;
+		render(spheres, i);
+		std::cout << "Rendered and saved spheres" << i << ".ppm" << std::endl << std::endl;
 		// Dont forget to clear the Vector holding the spheres.
 		spheres.clear();
 
 	}
+	auto finish = std::chrono::steady_clock::now();
+
+	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
+
+	std::cout << "---TIME TO SIMPLE SMOOTH SCALING: " << secondsPass << std::endl << std::endl;
+
 }
 
 

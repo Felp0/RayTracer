@@ -35,7 +35,8 @@
 //#include "Sphere.h"
 //#include "GlobalController.h"
 #include "RayTracer.h"
-
+#include <thread>
+#include <vector>
 //#if defined __linux__ || defined __APPLE__
 //// "Compiled for Linux
 //#else
@@ -291,7 +292,7 @@
 
 //http://dmitrysoshnikov.com/compilers/writing-a-pool-allocator/
 
-Pool RayTracer::m_MemoryAllocator{&Tracker::GetTracker(),4};
+Pool Object::poolAlooc{&Tracker::GetTracker(), 2};
 
 int main(int argc, char **argv)
 {
@@ -304,16 +305,16 @@ int main(int argc, char **argv)
 	//SimpleShrinking();
 	constexpr int arraysize = 7;
 
-	RayTracer* m_ray[arraysize];
-	std::cout << "size(Obj) = " << sizeof(RayTracer) << std::endl << std::endl;
+	Object* pObj[arraysize];
+	std::cout << "size(Obj) = " << sizeof(Object) << std::endl << std::endl;
 
 	std::cout << "Allocating " << arraysize << " objs" << std::endl;
 
 	//allocate
 	for (int i = 0; i < arraysize; ++i)
 	{
-		m_ray[i] = new RayTracer();
-		std::cout << "new [ " << i << " ] = " << m_ray[i] << std::endl;
+		pObj[i] = new Object();
+		std::cout << "new [ " << i << " ] = " << pObj[i] << std::endl;
 		pPool->GetPool().GetAvailableMem();
 	}
 	 
@@ -325,8 +326,8 @@ int main(int argc, char **argv)
 	//deallocate
 	for (int i = arraysize - 1; i >= 0; --i)
 	{
-		std::cout << "deleting " << i << " " << m_ray[i] << std::endl;
-		delete m_ray[i];
+		std::cout << "deleting " << i << " " << pObj[i] << std::endl;
+		delete pObj[i];
 		//pTracker->GetTracker().RemoveUsedMem();
 	}
 
@@ -334,16 +335,28 @@ int main(int argc, char **argv)
 	//std::cout << "Memory Used: " << pTracker->GetTracker().GetMemUsed() << std::endl;
 	//std::cout << "Memory Free: " << pTracker->GetTracker().GetAvailableMem() << std::endl;
 
-	m_ray[0] = new RayTracer();
-	std::cout << "new [0] = " << m_ray[0] << std::endl;
+	pObj[0] = new Object();
+	std::cout << "new [0] = " << pObj[0] << std::endl;
 
-	delete m_ray[0];
+	delete pObj[0];
 
+	RayTracer rt;
 
+	//Threads::CreatingFunction(RayTracer::SmoothScaling);
+	//Threads::ThreadIteration();
+	std::vector<std::thread> threads;
+	for (int i = 0; i <= 100; i++)
+	{
 
+		threads.push_back(std::thread(&RayTracer::SmoothScaling, &rt,i));
+	}
+	for (auto& thread : threads)
+	{
+		thread.join();
 
-	RayTracer::SmoothScaling();
-
+	}
+	threads.clear();
+	
 	free(pTracker); 
 	free(pPool);
 

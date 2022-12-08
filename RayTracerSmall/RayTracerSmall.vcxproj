@@ -144,15 +144,19 @@
   <ItemGroup>
     <ClCompile Include="GlobalController.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ObjectForPool.cpp" />
     <ClCompile Include="Pool.cpp" />
     <ClCompile Include="RayTracer.cpp" />
+    <ClCompile Include="Threads.cpp" />
     <ClCompile Include="Tracker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalController.h" />
+    <ClInclude Include="ObjectForPool.h" />
     <ClInclude Include="Pool.h" />
     <ClInclude Include="RayTracer.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Threads.h" />
     <ClInclude Include="Tracker.h" />
     <ClInclude Include="Vec3.h" />
   </ItemGroup>
