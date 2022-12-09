@@ -2,9 +2,7 @@
 #include <iostream>
 #include "Pool.h"
 
-
-
-
+//Simple struct to test my Memory Pool
 struct Object
 {
 	uint64_t data[4];
@@ -23,9 +21,4 @@ struct Object
 
 };
 
-class ObjectForPool
-{
-
-	
-};
 

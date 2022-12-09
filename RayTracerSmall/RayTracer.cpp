@@ -242,18 +242,3 @@ void RayTracer::SmoothScaling(int i)
 		// Dont forget to clear the Vector holding the spheres.
 		spheres.clear();
 }
-
-
-
-void* Sphere::operator new(size_t size)
-{
-	std::cout << "--CLASS SPECIFIC SPHERE NEW CALLED" << std::endl;
-	return::operator new(size, &Tracker::GetTracker());
-}
-
-void Sphere::operator delete(void* pMem)
-{
-	std::cout << "--CLASS SPECIFIC SPHERE DELETE CALLED" << std::endl;
-	return::operator delete(pMem);
-
-}

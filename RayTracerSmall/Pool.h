@@ -1,34 +1,13 @@
 #pragma once
 #include <iostream>
 
-
 struct Header;
-
 struct Tracker;
 
 struct Chunk
 {
 	Chunk* pNext;
 };
-
-//struct Object
-//{
-//	uint64_t data[2];
-//
-//	static Pool m_MemoryAllocator;
-//
-//	static void* operator new(size_t size)
-//	{
-//		return m_MemoryAllocator.Allocate(size);
-//	}
-//
-//	static void operator delete(void* pMem, size_t size)
-//	{
-//		return m_MemoryAllocator.Deallocate(pMem, size);
-//	}
-//};
-//
-//Pool Object::m_MemoryAllocator{ 8 };
 
 class Pool
 {

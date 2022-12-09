@@ -30,7 +30,7 @@ void Pool::Deallocate(void* pMem, size_t size)
 {
 	m_MemoryUsed--;
 	m_MemoryAvailable += size;
-	//working on this later
+
 	Header* pheader = (Header*)pMem;
 	pheader->m_tracker = m_tracker;
 
