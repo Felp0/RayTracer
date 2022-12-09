@@ -34,6 +34,11 @@
 //#include "Vec3.h"
 //#include "Sphere.h"
 //#include "GlobalController.h"
+// 
+// 
+
+
+
 #include "RayTracer.h"
 #include <thread>
 #include <vector>
@@ -296,7 +301,8 @@ Pool Object::poolAlooc{&Tracker::GetTracker(), 2};
 
 int main(int argc, char **argv)
 {
-	
+	auto start = std::chrono::steady_clock::now();
+
 	Tracker* pTracker = (Tracker*)malloc(sizeof(Tracker));
 	Pool* pPool = (Pool*)malloc(sizeof(Pool));
 	// This sample only allows one choice per program execution. Feel free to improve upon this
@@ -306,9 +312,14 @@ int main(int argc, char **argv)
 	constexpr int arraysize = 7;
 
 	Object* pObj[arraysize];
+
+#ifdef D3BUG
+
+
 	std::cout << "size(Obj) = " << sizeof(Object) << std::endl << std::endl;
 
 	std::cout << "Allocating " << arraysize << " objs" << std::endl;
+#endif // D3BUG
 
 	//allocate
 	for (int i = 0; i < arraysize; ++i)
@@ -330,10 +341,11 @@ int main(int argc, char **argv)
 		delete pObj[i];
 		//pTracker->GetTracker().RemoveUsedMem();
 	}
-
+#ifdef D3BUG
 	std::cout << "---BLOCKS USED: " << pPool->GetPool().GetNumOfChunks() << std::endl;
 	//std::cout << "Memory Used: " << pTracker->GetTracker().GetMemUsed() << std::endl;
 	//std::cout << "Memory Free: " << pTracker->GetTracker().GetAvailableMem() << std::endl;
+#endif // D3BUG
 
 	pObj[0] = new Object();
 	std::cout << "new [0] = " << pObj[0] << std::endl;
@@ -359,6 +371,15 @@ int main(int argc, char **argv)
 	
 	free(pTracker); 
 	free(pPool);
+
+	auto finish = std::chrono::steady_clock::now();
+
+	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
+
+//#ifdef D3BUG
+	std::cout << "---TIME TO RUN APPLICATION: " << secondsPass << std::endl << std::endl;
+
+//#endif // D3BUG
 
 	return 0;
 }

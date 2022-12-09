@@ -10,9 +10,12 @@ Tracker Tracker::defaultTracker;
 
  void Tracker::AllocateBytes(size_t size, Header* header)
  {
+	 aMutex.lock();
 	 m_trackerMemory += size;
 
+#ifdef D3BUG
 	 std::cout << "---TOTAL MEMORY ALLLOCATED:  " << m_trackerMemory << std::endl;
+#endif // D3BUG
 	 //Header stuff
 	 header->size = size;
 	 header->checkvalue = 42;
@@ -31,6 +34,8 @@ Tracker Tracker::defaultTracker;
 	 }
 	 m_currentHeader = header;
 	 //ask about this
+
+	 aMutex.unlock();
  }
 
 
@@ -40,7 +45,9 @@ Tracker Tracker::defaultTracker;
 		 return;
 
 	 m_trackerMemory -= size;
+#ifdef D3BUG
 	 std::cout << "---TOTAL MEMORY AFTER DELETE: " << m_trackerMemory << std::endl;
+#endif // D3BUG
 	 //Setting the pointer from old current to new current (old current next) when deleting from the linked list
 	 if (m_currentHeader == header)
 	 {

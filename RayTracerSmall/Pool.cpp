@@ -2,6 +2,7 @@
 #include "GlobalController.h"
 #include "Tracker.h"
 
+
 Pool Pool::pPool;
 
 Pool& Pool::GetPool()
@@ -47,7 +48,10 @@ Chunk* Pool::AllocateBlock(size_t Chunksize)
 {
 	pPool.GetPool().SetChunksUsed();
 
+#ifdef D3BUG
+
 	std::cout << "Allocating Block: (" << m_chunksBlock << " chunks) : " << std::endl << std::endl;
+#endif // D3BUG
 
 	size_t sizeBlock = m_chunksBlock * Chunksize;
 

@@ -44,6 +44,8 @@ void operator delete(void* pMem)
 	Header* pHeader = (Header*)((char*)pMem - sizeof(Header));
 	Footer* pFooter = (Footer*)((char*)pMem + pHeader->size);
 
+#ifdef D3BUG
+
 	if (pHeader->checkvalue != 42)
 	{
 		std::cout << "---ERROR HEADER CODE NOT MATCHING---" << std::endl;
@@ -53,6 +55,7 @@ void operator delete(void* pMem)
 	{
 		std::cout << "---ERROR FOOTER CODE NOT MATCHING---" << std::endl;
 	}
+#endif // D3BUG
 
 	pHeader->m_tracker->RemoveBytes(pHeader->size, pHeader);
 

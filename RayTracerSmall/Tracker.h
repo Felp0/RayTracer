@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+#include <mutex>
+#define D3BUG
+
 
 //foward referecing
 struct Header;
@@ -22,6 +25,7 @@ public:
 	//inline void				RemoveUsedMem() { m_MemoryUsed--; }
 	//inline void				SetChunksUsed() { m_ChunksUsed++; }
 
+	//inline Tracker& GetTracker() { return defaultTracker; }
 	inline size_t			GetTotalAllocatedMemory() { return m_totalMemory; }
 	inline size_t			GetMemUsed() { return m_MemoryUsed; }
 	//inline size_t			GetNumOfChunks() { return m_ChunksUsed; }
@@ -34,6 +38,8 @@ private:
 
 	//Default Tracker
 	static Tracker			defaultTracker;
+
+	std::mutex				aMutex; 
 
 	size_t					m_totalMemory;
 	size_t					m_trackerMemory = 0;
