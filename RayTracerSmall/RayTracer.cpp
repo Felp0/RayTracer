@@ -4,6 +4,7 @@ typedef Vec3<float> Vec3f;
 
 #define MAX_RAY_DEPTH 5
 #define D3BUG
+//#define SPHEREPRINT
 
 float mix(const float& a, const float& b, const float& mix)
 {
@@ -140,8 +141,7 @@ void RayTracer::render(const std::vector<Sphere>& spheres, int iteration)
 
 	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
 
-#ifdef D3BUG
-
+#ifdef DEBUG
 
 	std::cout << "---TIME TO RENDER: " << secondsPass << std::endl << std::endl;
 #endif // D3BUG
@@ -168,7 +168,7 @@ void RayTracer::BasicRender()
 
 	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
 
-#ifdef D3BUG
+#ifdef DEBUG
 	std::cout << "--TIME TO BASIC RENDER: " << secondsPass << std::endl << std::endl;
 #endif // D3BUG
 }
@@ -221,7 +221,7 @@ void RayTracer::SimpleShrinking()
 
 	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
 
-#ifdef D3BUG
+#ifdef DEBUG
 	std::cout << "---TIME TO SIMPLE SHRINKING: " << secondsPass << std::endl << std::endl;
 
 #endif // D3BUG
@@ -238,7 +238,9 @@ void RayTracer::SmoothScaling(int i)
 		spheres.push_back(Sphere(Vec3f(5.0, -1, -15), 2, Vec3f(0.90, 0.76, 0.46), 1, 0.0));
 		spheres.push_back(Sphere(Vec3f(5.0, 0, -25), 3, Vec3f(0.65, 0.77, 0.97), 1, 0.0));
 		render(spheres, i);
+#ifdef  SPHEREPRINT
 		std::cout << "Rendered and saved spheres" << i << ".ppm" << std::endl << std::endl;
+#endif //  SPHEREPRINT
 		// Dont forget to clear the Vector holding the spheres.
 		spheres.clear();
 }

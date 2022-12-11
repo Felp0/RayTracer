@@ -21,9 +21,15 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // [/ignore]
 #include "RayTracer.h"
-#include <thread>
-#include <vector>
 
+#ifdef _WIN32
+#include <thread>
+//#else // _WIN32
+#include <vector>
+#include <sys/types.h>
+#include <stdlib.h>
+#include <stdio.h>
+#endif
 
 Pool Object::poolAlooc{&Tracker::GetTracker(), 2};
 int main(int argc, char **argv)
@@ -40,13 +46,14 @@ int main(int argc, char **argv)
 
 	Object* pObj[arraysize];
 
-#ifdef D3BUG
 
+#ifdef DEBUG
 
 	std::cout << "size(Obj) = " << sizeof(Object) << std::endl << std::endl;
 
 	std::cout << "Allocating " << arraysize << " objs" << std::endl;
-#endif // D3BUG
+
+#endif // DEBUG
 
 	//allocate
 	for (int i = 0; i < arraysize; ++i)
@@ -67,7 +74,7 @@ int main(int argc, char **argv)
 		delete pObj[i];
 		//pTracker->GetTracker().RemoveUsedMem();
 	}
-#ifdef D3BUG
+#ifdef DEBUG
 	std::cout << "---BLOCKS USED: " << pPool->GetPool().GetNumOfChunks() << std::endl;
 	
 #endif // D3BUG
@@ -76,6 +83,8 @@ int main(int argc, char **argv)
 	std::cout << "new [0] = " << pObj[0] << std::endl;
 
 	delete pObj[0];
+
+#ifdef _WIN32
 
 	RayTracer rt;
 
@@ -94,15 +103,19 @@ int main(int argc, char **argv)
 	
 	free(pTracker); 
 	free(pPool);
+//#else 
+	
+
+#endif
 
 	auto finish = std::chrono::steady_clock::now();
 
 	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
 
-#ifdef D3BUG
+
 	std::cout << "---TIME TO RUN APPLICATION: " << secondsPass << std::endl << std::endl;
 
-#endif // D3BUG
+
 
 	return 0;
 }

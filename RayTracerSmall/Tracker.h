@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <mutex>
-#define D3BUG
+
 
 
 //foward referecing
