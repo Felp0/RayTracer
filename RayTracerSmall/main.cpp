@@ -99,10 +99,10 @@ int main(int argc, char **argv)
 
 	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
 
-//#ifdef D3BUG
+#ifdef D3BUG
 	std::cout << "---TIME TO RUN APPLICATION: " << secondsPass << std::endl << std::endl;
 
-//#endif // D3BUG
+#endif // D3BUG
 
 	return 0;
 }

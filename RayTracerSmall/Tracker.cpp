@@ -41,6 +41,7 @@ Tracker Tracker::defaultTracker;
 
  void Tracker::RemoveBytes(size_t size, Header* header)
  {
+	 aMutex.lock();
 	 if (m_currentHeader == NULL)
 		 return;
 
@@ -65,6 +66,6 @@ Tracker Tracker::defaultTracker;
 	 {
 		 header->m_prev->m_next = header->m_next;		
 	 }
-
+	 aMutex.unlock();
 	 
  }
