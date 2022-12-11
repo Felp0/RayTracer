@@ -14,7 +14,7 @@ Tracker Tracker::defaultTracker;
 	 m_trackerMemory += size;
 
 #ifdef D3BUG
-	 std::cout << "---TOTAL MEMORY ALLLOCATED:  " << m_trackerMemory << std::endl;
+	 //std::cout << "---TOTAL MEMORY ALLLOCATED:  " << m_trackerMemory << std::endl;
 #endif // D3BUG
 	 //Header stuff
 	 header->size = size;
@@ -47,7 +47,7 @@ Tracker Tracker::defaultTracker;
 
 	 m_trackerMemory -= size;
 #ifdef D3BUG
-	 std::cout << "---TOTAL MEMORY AFTER DELETE: " << m_trackerMemory << std::endl;
+	 //std::cout << "---TOTAL MEMORY AFTER DELETE: " << m_trackerMemory << std::endl;
 #endif // D3BUG
 	 //Setting the pointer from old current to new current (old current next) when deleting from the linked list
 	 if (m_currentHeader == header)
