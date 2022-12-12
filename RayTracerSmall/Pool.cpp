@@ -16,7 +16,7 @@ void* Pool::Allocate(size_t size)
 {
 	m_totalMemory += size;
 	//no chunks left in the current block, allocate a new one passing the chunk size and the header
-	if (pAlloc == __nullptr)
+	if (pAlloc == nullptr)
 		pAlloc = AllocateBlock(size);
 	
 	//the return value is the current position of the allocation pointer
