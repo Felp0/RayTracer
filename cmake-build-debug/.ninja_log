@@ -1,0 +1,9 @@
+# ninja log v5
+1	739	1670876520000891376	CMakeFiles/RayTracer.dir/RayTracerSmall/main.cpp.o	555f40af9248ad1b
+740	1111	1670876520368892186	CMakeFiles/RayTracer.dir/RayTracerSmall/GlobalController.cpp.o	c868c983733abaa3
+1	427	1670876540244936681	CMakeFiles/RayTracer.dir/RayTracerSmall/Pool.cpp.o	3606cf3b4b13dc39
+427	676	1670876540496937255	CMakeFiles/RayTracer.dir/RayTracerSmall/ObjectForPool.cpp.o	fc3e63855b872407
+676	1401	1670876541220938904	CMakeFiles/RayTracer.dir/RayTracerSmall/RayTracer.cpp.o	d29fa51460eeeca8
+1401	1761	1670876541580939725	CMakeFiles/RayTracer.dir/RayTracerSmall/Threads.cpp.o	ef838838e21e6dd8
+1761	2087	1670876541904940463	CMakeFiles/RayTracer.dir/RayTracerSmall/Tracker.cpp.o	97c40c08475f9b2c
+2087	2183	1670876542000940682	RayTracer	8df79f12c746229a
