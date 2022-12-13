@@ -1,4 +1,5 @@
 #include "RayTracer.h"
+#include "Forking.h"
 
 typedef Vec3<float> Vec3f;
 
@@ -227,6 +228,7 @@ void RayTracer::SimpleShrinking()
 #endif // D3BUG
 }
 
+#ifdef _WIN32
 void RayTracer::SmoothScaling(int i)
 {
 	std::vector<Sphere> spheres;
@@ -244,3 +246,23 @@ void RayTracer::SmoothScaling(int i)
 		// Dont forget to clear the Vector holding the spheres.
 		spheres.clear();
 }
+#else
+void RayTracer::LinuxSmoothScaling()
+{
+    std::vector<Sphere> spheres;
+
+    for(int r = 0; r <= 100; r++)
+    {
+        spheres.push_back(Sphere(Vec3f(0.0, -10004, -20), 10000, Vec3f(0.20, 0.20, 0.20), 0, 0.0));
+        spheres.push_back(Sphere(Vec3f(0.0, 0, -20), r / 100., Vec3f(1.00, 0.32, 0.36), 1, 0.5)); // Radius++ change here
+        spheres.push_back(Sphere(Vec3f(5.0, -1, -15), 2, Vec3f(0.90, 0.76, 0.46), 1, 0.0));
+        spheres.push_back(Sphere(Vec3f(5.0, 0, -25), 3, Vec3f(0.65, 0.77, 0.97), 1, 0.0));
+        RayTracer::render(spheres, r);
+        std::cout << "Render saved sphere " << r << std::endl;
+        spheres.clear();
+    }
+
+
+}
+
+#endif

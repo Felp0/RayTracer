@@ -20,4 +20,4 @@ add_executable(RayTracer
         RayTracerSmall/Threads.h
         RayTracerSmall/Tracker.cpp
         RayTracerSmall/Tracker.h
-        RayTracerSmall/Vec3.h)
+        RayTracerSmall/Vec3.h RayTracerSmall/Forking.cpp RayTracerSmall/Forking.h)

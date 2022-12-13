@@ -24,11 +24,8 @@
 
 #ifdef _WIN32
 #include <thread>
-//#else // _WIN32
-#include <vector>
-#include <sys/types.h>
-#include <stdlib.h>
-#include <stdio.h>
+#else // _WIN32
+#include "Forking.h"
 #endif
 
 Pool Object::poolAlooc{&Tracker::GetTracker(), 2};
@@ -84,10 +81,8 @@ int main(int argc, char **argv)
 
 	delete pObj[0];
 
+    RayTracer rt;
 #ifdef _WIN32
-
-	RayTracer rt;
-
 	std::vector<std::thread> threads;
 	for (int i = 0; i <= 100; i++)
 	{
@@ -101,10 +96,12 @@ int main(int argc, char **argv)
 	}
 	threads.clear();
 	
-	free(pTracker); 
-	free(pPool);
-//#else 
-	
+
+#else
+    int i = 1;
+    //rt = RayTracer();
+    Forking::CreatingParent();
+
 
 #endif
 
@@ -115,6 +112,8 @@ int main(int argc, char **argv)
 
 	std::cout << "---TIME TO RUN APPLICATION: " << secondsPass << std::endl << std::endl;
 
+    free(pTracker);
+    free(pPool);
 
 
 	return 0;

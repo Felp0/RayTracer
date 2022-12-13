@@ -98,6 +98,13 @@ build CMakeFiles/RayTracer.dir/RayTracerSmall/Tracker.cpp.o: CXX_COMPILER__RayTr
   OBJECT_DIR = CMakeFiles/RayTracer.dir
   OBJECT_FILE_DIR = CMakeFiles/RayTracer.dir/RayTracerSmall
 
+build CMakeFiles/RayTracer.dir/RayTracerSmall/Forking.cpp.o: CXX_COMPILER__RayTracer_Debug /home/osboxes/CLionProjects/RayTracer/RayTracerSmall/Forking.cpp || cmake_object_order_depends_target_RayTracer
+  DEP_FILE = CMakeFiles/RayTracer.dir/RayTracerSmall/Forking.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/osboxes/CLionProjects/RayTracer/RayTracerSmall
+  OBJECT_DIR = CMakeFiles/RayTracer.dir
+  OBJECT_FILE_DIR = CMakeFiles/RayTracer.dir/RayTracerSmall
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target RayTracer
@@ -106,7 +113,7 @@ build CMakeFiles/RayTracer.dir/RayTracerSmall/Tracker.cpp.o: CXX_COMPILER__RayTr
 #############################################
 # Link the executable RayTracer
 
-build RayTracer: CXX_EXECUTABLE_LINKER__RayTracer_Debug CMakeFiles/RayTracer.dir/RayTracerSmall/GlobalController.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/main.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/ObjectForPool.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/Pool.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/RayTracer.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/Threads.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/Tracker.cpp.o
+build RayTracer: CXX_EXECUTABLE_LINKER__RayTracer_Debug CMakeFiles/RayTracer.dir/RayTracerSmall/GlobalController.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/main.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/ObjectForPool.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/Pool.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/RayTracer.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/Threads.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/Tracker.cpp.o CMakeFiles/RayTracer.dir/RayTracerSmall/Forking.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/RayTracer.dir
   POST_BUILD = :

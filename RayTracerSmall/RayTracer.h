@@ -2,7 +2,6 @@
 #include <fstream>
 #include <iostream>
 #include <cassert>
-#include "Threads.h"
 #include <algorithm>
 #include <sstream>
 #include <string.h>
@@ -11,10 +10,12 @@
 #include <cmath>
 #include <vector>
 #include <chrono>
+
 #include "Vec3.h"
 #include "Sphere.h"
 #include "GlobalController.h"
 #include "ObjectForPool.h"
+#include "Threads.h"
 
 #ifdef _WIN32
 #include <ppl.h>
@@ -34,12 +35,13 @@ class RayTracer
 {
 
 public:
-	
+	//RayTracer() {}
 
-	static void render(const std::vector<Sphere>& spheres, int iteration);
+    static void render(const std::vector<Sphere>& spheres, int iteration);
 	void BasicRender();
 	void SimpleShrinking();
 	void SmoothScaling(int i);
+    static void LinuxSmoothScaling();
 	
 
 	
