@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+#include <mutex>
+
+
 
 //foward referecing
 struct Header;
@@ -18,27 +21,23 @@ public:
 	static Tracker&			GetTracker();
 
 	inline void				SetTotalMemory(size_t allocatedMem) { m_totalMemory = allocatedMem; }
-	//inline void				AddUsedMem() { m_MemoryUsed++; }
-	//inline void				RemoveUsedMem() { m_MemoryUsed--; }
-	//inline void				SetChunksUsed() { m_ChunksUsed++; }
+	
 
+	//inline Tracker& GetTracker() { return defaultTracker; }
 	inline size_t			GetTotalAllocatedMemory() { return m_totalMemory; }
 	inline size_t			GetMemUsed() { return m_MemoryUsed; }
-	//inline size_t			GetNumOfChunks() { return m_ChunksUsed; }
+	
 
 
 private:
-	//Saw this in the Memory pool website ask  david
-	//Tracker(const Tracker&);
-	//Tracker& operator=(const Tracker&);
-
 	//Default Tracker
 	static Tracker			defaultTracker;
+
+	std::mutex				aMutex; 
 
 	size_t					m_totalMemory;
 	size_t					m_trackerMemory = 0;
 
 	size_t					m_MemoryUsed = 0;
-	//size_t					m_MemoryAvailable = 0;
 };
 

@@ -1,20 +1,25 @@
 #pragma once
-#include <stdlib.h>
-#include <cstdio>
-#include <cmath>
 #include <fstream>
-#include <vector>
 #include <iostream>
 #include <cassert>
-// Windows only
 #include <algorithm>
 #include <sstream>
 #include <string.h>
+#include <stdlib.h>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <chrono>
+
 #include "Vec3.h"
 #include "Sphere.h"
 #include "GlobalController.h"
-#include "Object.h"
+#include "ObjectForPool.h"
+#include "Threads.h"
 
+#ifdef _WIN32
+#include <ppl.h>
+#endif
 
 
 
@@ -28,13 +33,16 @@
 
 class RayTracer
 {
-public:
-	
 
-	static void render(const std::vector<Sphere>& spheres, int iteration);
+public:
+	//RayTracer() {}
+
+    static void render(const std::vector<Sphere>& spheres, int iteration);
 	void BasicRender();
 	void SimpleShrinking();
-	static void SmoothScaling();
+	void SmoothScaling(int i);
+    static void LinuxSmoothScaling();
+	
 
 	
 
@@ -49,7 +57,8 @@ public:
 	{
 		return m_MemoryAllocator.Deallocate(pMem, size);
 	}
-
+private:
+	std::mutex aMutex;
 	
 };
 

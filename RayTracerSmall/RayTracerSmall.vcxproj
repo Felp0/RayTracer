@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalController.h" />
+    <ClInclude Include="ObjectForPool.h" />
     <ClInclude Include="Pool.h" />
     <ClInclude Include="RayTracer.h" />
     <ClInclude Include="Sphere.h" />

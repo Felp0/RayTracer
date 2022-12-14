@@ -2,6 +2,7 @@
 #include "GlobalController.h"
 #include "Tracker.h"
 
+
 Pool Pool::pPool;
 
 Pool& Pool::GetPool()
@@ -15,7 +16,7 @@ void* Pool::Allocate(size_t size)
 {
 	m_totalMemory += size;
 	//no chunks left in the current block, allocate a new one passing the chunk size and the header
-	if (pAlloc == __nullptr)
+	if (pAlloc == nullptr)
 		pAlloc = AllocateBlock(size);
 	
 	//the return value is the current position of the allocation pointer
@@ -29,7 +30,7 @@ void Pool::Deallocate(void* pMem, size_t size)
 {
 	m_MemoryUsed--;
 	m_MemoryAvailable += size;
-	//working on this later
+
 	Header* pheader = (Header*)pMem;
 	pheader->m_tracker = m_tracker;
 
@@ -47,7 +48,10 @@ Chunk* Pool::AllocateBlock(size_t Chunksize)
 {
 	pPool.GetPool().SetChunksUsed();
 
-	std::cout << "Allocating Block: (" << m_chunksBlock << " chunks) : \n\n";
+#ifdef D3BUG
+
+	std::cout << "Allocating Block: (" << m_chunksBlock << " chunks) : " << std::endl << std::endl;
+#endif // D3BUG
 
 	size_t sizeBlock = m_chunksBlock * Chunksize;
 
