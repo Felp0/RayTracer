@@ -21,6 +21,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // [/ignore]
 #include "RayTracer.h"
+#include <chrono>
 
 #ifdef _WIN32
 #include <thread>
@@ -32,7 +33,6 @@ Pool Object::poolAlooc{&Tracker::GetTracker(), 2};
 int main(int argc, char **argv)
 {
 	auto start = std::chrono::steady_clock::now();
-
 	Tracker* pTracker = (Tracker*)malloc(sizeof(Tracker));
 	Pool* pPool = (Pool*)malloc(sizeof(Pool));
 	// This sample only allows one choice per program execution
@@ -113,6 +113,14 @@ int main(int argc, char **argv)
 
     free(pTracker);
     free(pPool);
+
+
+	auto finish = std::chrono::steady_clock::now();
+
+	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
+
+
+	std::cout << "---TIME TO RUN APPLICATION: " << secondsPass << std::endl << std::endl;
 
 
 	return 0;
