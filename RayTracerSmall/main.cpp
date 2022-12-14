@@ -86,7 +86,6 @@ int main(int argc, char **argv)
 	std::vector<std::thread> threads;
 	for (int i = 0; i <= 100; i++)
 	{
-
 		threads.push_back(std::thread(&RayTracer::SmoothScaling, &rt,i));
 	}
 	for (auto& thread : threads)
