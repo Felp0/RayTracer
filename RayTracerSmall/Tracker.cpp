@@ -1,5 +1,6 @@
 #include "Tracker.h"
 #include "GlobalController.h"
+#define DEBUG
 
 Tracker Tracker::defaultTracker;
 

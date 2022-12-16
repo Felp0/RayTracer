@@ -115,13 +115,6 @@ int main(int argc, char **argv)
     free(pPool);
 
 
-	auto finish = std::chrono::steady_clock::now();
-
-	double secondsPass = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
-
-
-	std::cout << "---TIME TO RUN APPLICATION: " << secondsPass << std::endl << std::endl;
-
 
 	return 0;
 }
